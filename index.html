@@ -7,12 +7,47 @@
 	<link rel="stylesheet" href="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.min.css" />  
 	<link rel="stylesheet" href="mobileMingle/themes/mingle.min.css">    
 	<script type="text/javascript" src="mobileMingle/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="mobileMingle/highcharts.js"></script>
 	<script type="text/javascript" src="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.js"></script>  
 </head> 
 <body> 
 
 	<body> 
-	<div data-role="page" id="one">
+	<div data-role="page" id="one"> 
+ 
+		<script type="text/javascript">
+		
+		var options = {
+						chart: {
+							renderTo: 'container',
+							type: 'column',
+							height: 250
+						}, 
+						tooltip: {
+			        enabled: false
+					  },
+						legend: {
+							enabled: false	
+						},
+						title: {
+							text: 'User Journey Backlog'
+						},
+						xAxis: {
+							categories: ["Step 1","Step 1","Step 3"]
+						},
+						yAxis: {
+							title: {
+								text: '# of Stories'
+							}
+						},
+						series: [{data:[1,2,4]}]
+					};
+		
+		$(function(){  			
+			var chart = new Highcharts.Chart(options);
+		});    
+	 </script>
+		
 		<div data-role="header">
 			<h1>Mobile Mingle</h1>
 		</div>
@@ -36,13 +71,17 @@
 
 	<div data-role="page" id="two" data-theme="a">
 		<div data-role="header">
-			<h1>Coming soon</h1>
+			<h1>Mobile Mingle</h1>
 		</div>
+    <div>
+		<div data-role="content">
+        <div id="container"></div>
+    </div>
 		<a href="#one" data-direction="reverse" data-role="button" data-theme="b" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-b">
 			<span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true">
 				<span class="ui-btn-text">Back</span>
 			</span>
 		</a>
 	</div>    
-	</body>
+	</body> 
 </html>
