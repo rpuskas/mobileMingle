@@ -21,7 +21,7 @@
 						chart: {
 							renderTo: 'container',
 							type: 'column',
-							height: 250
+							height: 175
 						}, 
 						tooltip: {
 			        enabled: false
@@ -61,34 +61,24 @@
 					<div class="ui-block-b"><div class="ui-bar ui-bar-e">55 stories</div></div>
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e">Total Story Points</div></div>
 					<div class="ui-block-b"><div class="ui-bar ui-bar-e">157 points</div></div>
-		</div> 
-		<a href="#two" data-role="button" data-theme="c" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c">
-			<span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true">
-				<span class="ui-btn-text">View Graph</span>
-			</span>  			
-		</a>
+		</div>  
+		<a href="#two" data-role="button">View Graph</a>
 	</div>
 	<div data-role="page" id="two" data-theme="a">
 		<div data-role="header">
 			<h1>Mobile Mingle</h1>
 		</div>
-    <div>
 		<div data-role="content">
         <div id="container"></div>  
 		 		<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<legend>Show Points</legend>
+					<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
 					     	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
-					     	<label for="radio-choice-1">On</label>
+					     	<label for="radio-choice-1">Points</label>
 					     	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
-					     	<label for="radio-choice-2">Off</label>
+					     	<label for="radio-choice-2">Stories</label>
 					</fieldset>  
-				</div>
-				<a href="#one" data-direction="reverse" data-role="button" data-theme="b" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-b">
-					<span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true">
-						<span class="ui-btn-text">Back</span>
-					</span>
-				</a>
+				</div>   
+				<a href="#one" data-role="button" data-icon="back">Back</a>    
     </div> 
 	</div>    
 	</body> 
