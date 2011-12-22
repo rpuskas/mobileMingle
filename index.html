@@ -13,41 +13,7 @@
 <body> 
 
 	<body> 
-	<div data-role="page" id="one"> 
- 
-		<script type="text/javascript">
-		
-		var options = {
-						chart: {
-							renderTo: 'container',
-							type: 'column',
-							height: 175
-						}, 
-						tooltip: {
-			        enabled: false
-					  },
-						legend: {
-							enabled: false	
-						},
-						title: {
-							text: 'User Journey Backlog'
-						},
-						xAxis: {
-							categories: ["Step 1","Step 1","Step 3"]
-						},
-						yAxis: {
-							title: {
-								text: '# of Stories'
-							}
-						},
-						series: [{data:[1,2,4]}]
-					};
-		
-		$(function(){  			
-			var chart = new Highcharts.Chart(options);
-		});    
-	 </script>
-		
+	<div data-role="page" id="one"> 		
 		<div data-role="header">
 			<h1>Mobile Mingle</h1>
 		</div>
@@ -62,23 +28,25 @@
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e">Total Story Points</div></div>
 					<div class="ui-block-b"><div class="ui-bar ui-bar-e">157 points</div></div>
 		</div>  
-		<a href="#two" data-role="button">View Graph</a>
-	</div>
+		<a href="#two" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a> 
+	</div>  
+	
 	<div data-role="page" id="two" data-theme="a">
 		<div data-role="header">
-			<a href="#one" data-role="button" data-icon="arrow-l" >Back</a><h1>Mobile Mingle</h1>
+			<a href="#one" data-role="button" data-icon="arrow-l" data-direction="reverse">Back</a>
+			<h1>Mobile Mingle</h1>
 		</div>
 		<div data-role="content">
-	        <div id="container"></div>  
-	 		<div data-role="fieldcontain">
+			<div id="container"></div>  
 				<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
 				     	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
 				     	<label for="radio-choice-1">Points</label>
 				     	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
 				     	<label for="radio-choice-2">Stories</label>
-				</fieldset>  
-			</div>       
+				</fieldset>        
     	</div> 
-	</div>    
+	</div> 
+	 
+	<script type="text/javascript" src="mobileMingle/index.js"></script>
 	</body> 
 </html>
