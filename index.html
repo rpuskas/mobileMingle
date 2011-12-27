@@ -1,8 +1,9 @@
 <!DOCTYPE html> 
 <html>  
 	<head> 
-	<title>My Page</title> 
-	<meta name="viewport" content="width=device-width, initial-scale=1">   
+	<title>Mobile Mingle</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">    
+	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<base href="http://dl.dropbox.com/u/41174287/mobileMingle" target="_blank" />
 	<link rel="stylesheet" href="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.min.css" />  
 	<link rel="stylesheet" href="mobileMingle/themes/mingle.css">    
@@ -11,9 +12,8 @@
 	<script type="text/javascript" src="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.js"></script>  
 </head> 
 <body> 
-
-	<body> 
-	<section data-role="page" id="one"> 		
+	
+	<section data-role="page" id="main"> 		
 		<header data-role="header">
 			<h1>Mobile Mingle</h1>
 		</header>
@@ -28,24 +28,46 @@
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e">Total Story Points</div></div>
 					<div class="ui-block-b"><div class="ui-bar ui-bar-e">157 points</div></div>
 		</div>  
-		<a href="#two" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a> 
+		<a href="#viewGraph" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a>  
+		
+		<div href="mobileMingle/enterDetails.html" data-role="collapsible" data-rel="dialog" data-transition="pop">Enter details
+			<h3>Enter details</h3>
+			<div data-role="content" data-theme="c">
+				<div data-role="fieldcontain">
+				    <label for="name">Journey</label>
+				    <input type="text" name="name" id="name" value="" />
+						<label for="points">Points:</label>
+				    <input type="number" name="points" id="points" value="" />  
+						<label for="storyCount">Story Count:</label>
+				    <input type="number" name="storyCount" id="storyCount" value="" />
+				</div>  
+
+				<a id="add" data-role="button" data-theme="b">Add</a>       
+				<a href="#" data-role="button" data-theme="c">Clear</a> 
+
+			</div>
+		</div>  
+		
 	</section>  
 	
-	<section data-role="page" id="two" data-theme="a">
+	<section data-role="page" id="viewGraph" data-theme="a">
 		<header data-role="header">
-			<a href="#one" data-role="button" data-icon="arrow-l" data-direction="reverse">Back</a>
+			<a href="#main" data-role="button" data-icon="arrow-l" data-direction="reverse">Back</a>
 			<h1>Mobile Mingle</h1>
 		</header>
 		<div data-role="content">
 			<div id="container"></div>  
 				<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-						<select name="slider-stories" id="slider-stories" data-role="slider">
+						<select name="slider-stories" id="slider-stories" data-theme="a" data-role="slider">
 							<option value="on">Stores</option>
 							<option>Points</option>
 				</fieldset>        
     	</div> 
-	</section> 
+	</section>  
+ 
 	 
-	<script type="text/javascript" src="mobileMingle/index.js"></script>
+	<script type="text/javascript" src="mobileMingle/index.js"></script> 
+	<script type="text/javascript" src="mobileMingle/enterDetails.js"></script> 
+	
 	</body> 
 </html>
