@@ -7,29 +7,28 @@
 	<base href="http://dl.dropbox.com/u/41174287/mobileMingle" target="_blank" />
 	<link rel="stylesheet" href="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.min.css" />  
 	<link rel="stylesheet" href="mobileMingle/themes/mingle.css">    
+	<script type="text/javascript" src="mobileMingle/underscore-min.js"></script>  
 	<script type="text/javascript" src="mobileMingle/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="mobileMingle/highcharts.js"></script>
-	<script type="text/javascript" src="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.js"></script>  
+	<script type="text/javascript" src="mobileMingle/jquery.mobile-1.0/jquery.mobile-1.0.js"></script>
 </head> 
 <body> 
 	
 	<section data-role="page" id="main"> 		
 		<header data-role="header">
 			<h1>Mobile Mingle</h1>
-		</header>
-		<div data-role="content" >	
-			<p>Welcome to the proof of concept Mobile Mingle web application</p>	
-		</div> 
+		</header> 
+		
 		<div class="ui-grid-a">
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e">Steps</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-e">8</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-e" id="totalSteps">&nbsp;</div></div>
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e">Story Count</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-e">55 stories</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-e" id="totalStories">&nbsp;</div></div>
 					<div class="ui-block-a"><div class="ui-bar ui-bar-e">Total Story Points</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-e">157 points</div></div>
-		</div>  
-		<a href="#viewGraph" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a>  
-		
+					<div class="ui-block-b"><div class="ui-bar ui-bar-e" id="totalPoints">&nbsp;</div></div>
+		</div>    
+		</script>
+
 		<div href="mobileMingle/enterDetails.html" data-role="collapsible" data-rel="dialog" data-transition="pop">Enter details
 			<h3>Enter details</h3>
 			<div data-role="content" data-theme="c">
@@ -46,7 +45,9 @@
 				<a href="#" data-role="button" data-theme="c">Clear</a> 
 
 			</div>
-		</div>  
+		</div> 
+		
+		<a href="#viewGraph" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a>   
 		
 	</section>  
 	
@@ -65,9 +66,7 @@
     	</div> 
 	</section>  
  
-	 
 	<script type="text/javascript" src="mobileMingle/index.js"></script> 
-	<script type="text/javascript" src="mobileMingle/enterDetails.js"></script> 
 	
 	</body> 
 </html>

@@ -1,8 +1,19 @@
 $(function(){  	 
 	
 	var journies = [];          
-	if(localStorage.journies){
-		journies = JSON.parse(localStorage.journies);
+	if(localStorage.journies){  
+		
+		journies = JSON.parse(localStorage.journies); 
+		  
+		window.debug = journies;
+		 
+		var totalPoints =  _.reduce(journies, function(total, num){ return total + parseInt(num.points); }, 0);
+		var totalStories = _.reduce(journies, function(total, num){ return total + parseInt(num.count); }, 0); 
+
+	  	$("#totalPoints").html(totalPoints);
+	  	$("#totalStories").html(totalStories);
+	  	$("#totalJournies").html(journies.length); 
+		
 	}
 	
 	var options = {
@@ -32,29 +43,8 @@ $(function(){
 	};  
 	var chart = new Highcharts.Chart(options);  
 	
-	
-	$( '#viewGraph' ).live( 'pageshow',function(event){
-	   	 
-			console.log('shown');
-			var journies = [];          
-			if(localStorage.journies){
-				journies = JSON.parse(localStorage.journies);
-			}
-
-			window.debug = journies;
-
-			var selectedItem = $(this).val();	   
-			options.yAxis.title.text = (selectedItem == 'Points' ? '# of Points' : '# of Stories');  
-			options.xAxis.categories = journies.map(function(x){ return x.name });
-			options.series = [{data: journies.map(function(x){ return parseInt(x.points) })}];
-			chart = new Highcharts.Chart(options); 
-			
-	});
-	 
-	
-	$( "#slider-stories" ).bind( "change", function(event, ui) {    
-		    
-		console.log('changed');
+	var loadGraph = function(){
+		
 		var journies = [];          
 		if(localStorage.journies){
 			journies = JSON.parse(localStorage.journies);
@@ -67,13 +57,21 @@ $(function(){
 		options.xAxis.categories = journies.map(function(x){ return x.name });
 		options.series = [{data: journies.map(function(x){ return parseInt(x.points) })}];
 		chart = new Highcharts.Chart(options);
+		
+	}               
+	
+	$( '#viewGraph' ).live( 'pageshow',function(event){
+	   	loadGraph();
+	});
+	  
+	$( "#slider-stories" ).bind( "change", function(event, ui) {
+	    loadGraph();
 	});   
 	
-	
 	$( "#add" ).bind( "click", function(event, ui) { 
-
+		  
 		var journies = localStorage.journies ? JSON.parse(localStorage.journies) : [];
-		
+
 		journies.push({
 			name: $("#name").val(),  
 			count: $("#storyCount").val(),
@@ -81,8 +79,8 @@ $(function(){
 		});  
 
 		console.log(JSON.stringify(journies));
-		localStorage.journies = JSON.stringify(journies);
-   
-	});
+		localStorage.journies = JSON.stringify(journies);   
+		
+	}); 
 	
 });    
