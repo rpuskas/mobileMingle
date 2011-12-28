@@ -29,6 +29,8 @@
 		</div>    
 		</script>
 
+		<a href="#viewGraph" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a>   
+
 		<div href="mobileMingle/enterDetails.html" data-role="collapsible" data-rel="dialog" data-transition="pop">Enter details
 			<h3>Enter details</h3>
 			<div data-role="content" data-theme="c">
@@ -38,16 +40,17 @@
 						<label for="points">Points:</label>
 				    <input type="number" name="points" id="points" value="" />  
 						<label for="storyCount">Story Count:</label>
-				    <input type="number" name="storyCount" id="storyCount" value="" />
+				    <input type="number" name="storyCount" id="storyCount" value="" /> 
 				</div>  
-
-				<a id="add" data-role="button" data-theme="b">Add</a>       
-				<a href="#" data-role="button" data-theme="c">Clear</a> 
-
+         
+				<div class="ui-grid-b"> 
+					<div class="ui-block-a"><button type="submit" id="add" data-theme="a">Add</button></div>
+					<div class="ui-block-b"><button type="submit" id="clear" data-theme="b">Clear Fields</button></div>
+					<div class="ui-block-b"><button type="submit" id="erase" data-theme="c">Erase All</button></div>
+				</div>
+				
 			</div>
 		</div> 
-		
-		<a href="#viewGraph" data-role="button" data-icon="arrow-r" data-iconpos="right">View Graph</a>   
 		
 	</section>  
 	
@@ -60,7 +63,7 @@
 			<div id="container"></div>  
 				<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
 						<select name="slider-stories" id="slider-stories" data-theme="a" data-role="slider">
-							<option value="on">Stores</option>
+							<option>Stories</option>
 							<option>Points</option>
 				</fieldset>        
     	</div> 

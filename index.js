@@ -3,6 +3,14 @@ MM.Index = {
 	 
 	getJournies : function(){
 		return localStorage.journies ? JSON.parse(localStorage.journies) : [];            		
+	},  
+	
+	clearFields : function(){ 
+		
+		$("#name").val("");
+		$("#points").val("");
+		$("#storyCount").val("");
+		
 	}
 }  
 
@@ -34,14 +42,22 @@ MM.Index.Chart = {
 		series: [{data: MM.Index.getJournies().map(function(x){ return parseInt(x.points) })}]
 	},  
 	
-	load : function(){
+	load : function(sliderValue){ 
+		  
+		sliderValue = sliderValue || 'Points';
+		
+		var journies = MM.Index.getJournies();    
+		this.options.yAxis.title.text = (sliderValue == 'Points' ? '# of Points' : '# of Stories' ); 
 
-		var journies = MM.Index.getJournies();
+		this.options.xAxis.categories = journies.map(function(x){ return x.name });    
+		if(sliderValue == 'Points'){
+			this.options.series = [{data: journies.map(function(x){ return parseInt(x.points) })}]; 
+		}   
+		else{
+			this.options.series = [{data: journies.map(function(x){ return parseInt(x.count) })}]; 
+		}
 
-		this.options.xAxis.categories = journies.map(function(x){ return x.name });
-		this.options.series = [{data: journies.map(function(x){ return parseInt(x.points) })}];
 		chart = new Highcharts.Chart(this.options);
-
 	}
 	
 }
@@ -51,7 +67,8 @@ MM.Index.Grid = {
   refresh : function(){
 
 		var journies = MM.Index.getJournies();
-
+       
+		window.debug = journies;
 		var totalPoints =  _.reduce(journies, function(total, num){ return total + parseInt(num.points); }, 0);
 		var totalStories = _.reduce(journies, function(total, num){ return total + parseInt(num.count); }, 0); 
 
@@ -81,15 +98,26 @@ $(function(){
 	  
 	$( "#slider-stories" ).bind( "change", function(event, ui) {  
 		
-		var selectedItem = $(this).val();	   
-		options.yAxis.title.text = (selectedItem == 'Points' ? '# of Points' : '# of Stories');
+		MM.Index.Chart.load($(this).val());
 		
-		MM.Index.Chart.load();
 	});   
+
+	$( "#erase" ).bind( "click", function(event, ui) {   
+		
+		localStorage.journies = "";   
+		MM.Index.Grid.refresh();
+		
+	});
+	
+	$( "#clear" ).bind( "click", function(event, ui) {  
+		
+		MM.Index.clearFields();
+		
+	});
 	
 	$( "#add" ).bind( "click", function(event, ui) { 
 		  
-		var journies = MM.Index.getJournies();
+		var journies = MM.Index.getJournies();  
 
 		journies.push({
 			name: $("#name").val(),  
@@ -98,6 +126,8 @@ $(function(){
 		});  
 
 		localStorage.journies = JSON.stringify(journies); 
+		
+		MM.Index.clearFields();
 		MM.Index.Grid.refresh();  
 		
 	}); 
