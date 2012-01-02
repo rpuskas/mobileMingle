@@ -109,12 +109,6 @@ $(function(){
 		
 	});
 	
-	$( "#clear" ).bind( "click", function(event, ui) {  
-		
-		MM.Index.clearFields();
-		
-	});
-	
 	$( "#add" ).bind( "click", function(event, ui) { 
 		  
 		var journies = MM.Index.getJournies();  
