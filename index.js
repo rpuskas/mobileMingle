@@ -1,4 +1,7 @@
 MM = {}   
+MM.Controllers = {};
+MM.Views = {};   
+
 MM.Index = {
 	 
 	getJournies : function(){
@@ -10,7 +13,6 @@ MM.Index = {
 		$("#name").val("");
 		$("#points").val("");
 		$("#storyCount").val("");
-		
 	}
 }  
 
@@ -68,7 +70,6 @@ MM.Index.Grid = {
 
 		var journies = MM.Index.getJournies();
        
-		window.debug = journies;
 		var totalPoints =  _.reduce(journies, function(total, num){ return total + parseInt(num.points); }, 0);
 		var totalStories = _.reduce(journies, function(total, num){ return total + parseInt(num.count); }, 0); 
 
@@ -79,8 +80,53 @@ MM.Index.Grid = {
 	
 }
 
-$(function(){  	 
-	   
+$(function(){  
+	
+	window.Journey = Backbone.Model.extend(
+	{   
+		defaults: {
+		    "name":  "nameless",
+		    "points":     0,
+		    "stories":    0
+	   	}
+
+	});  
+	
+	window.JourneyList = Backbone.Collection.extend({
+		model: Journey,
+		points: function(){
+
+		},
+		stories: function(){
+
+		} 
+	}); 
+	window.Journeys = new JourneyList;
+	
+	window.JourneyView = Backbone.View.extend({
+		
+		el: $("#journey"),
+		clear: function(){   
+			_.each($(this.el).find("input"),function(y){$(y).val("0");})         
+		},
+		render: function(){
+			$("#name").val(this.model.get("name"));
+			$("#points").val(this.model.get("points"));
+			$("#storyCount").val(this.model.get("stories"));
+			return this; 
+		},
+		events: {
+		    "click #add" : "addJourney"
+		}, 
+		addJourney: function(){ 
+			var newJourney = new Journey({ name: $("name"),points: $("points"),stories: $("storyCount") });
+			window.Journeys.add(newJourney);
+		}  
+		
+	});	 
+	
+	window.JourneyViewInstance = new JourneyView({model: new Journey}); 
+	     
 	var journies = MM.Index.getJournies();  
 	MM.Index.Grid.refresh();
                

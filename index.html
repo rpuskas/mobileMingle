@@ -8,9 +8,10 @@
 	<link rel="stylesheet" href="mobileMingle/lib/jquery.mobile-1.0/jquery.mobile-1.0.min.css" />  
 	<link rel="stylesheet" href="mobileMingle/themes/mingle.css">    
 	<script type="text/javascript" src="mobileMingle/lib/underscore-min.js"></script>  
-<script type="text/javascript" src="mobileMingle/lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="mobileMingle/lib/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="mobileMingle/lib/highcharts.js"></script>
-	<script type="text/javascript" src="mobileMingle/lib/jquery.mobile-1.0/jquery.mobile-1.0.js"></script>
+	<script type="text/javascript" src="mobileMingle/lib/jquery.mobile-1.0/jquery.mobile-1.0.js"></script>     
+	<script type="text/javascript" src="mobileMingle/lib/backbone.js"></script>                              
 </head> 
 <body> 
 	
@@ -33,7 +34,7 @@
 
 		<div href="mobileMingle/enterDetails.html" data-role="collapsible" data-rel="dialog" data-transition="pop">Enter details
 			<h3>Enter details</h3>
-			<div data-role="content" data-theme="c">
+			<div data-role="content" data-theme="c" id="journey">
 				<div data-role="fieldcontain">
 				    <label for="name">Journey</label>
 				    <input type="text" name="name" id="name" value="" />
@@ -50,7 +51,6 @@
 				
 			</div>
 		</div> 
-		
 	</section>  
 	
 	<section data-role="page" id="viewGraph" data-theme="a">
