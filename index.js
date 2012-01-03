@@ -45,7 +45,6 @@ $(function(){
 		    "points":     0,
 		    "stories":    0
 	   	}
-
 	});  
 	
 	window.JourneyList = Backbone.Collection.extend({ 
@@ -124,6 +123,7 @@ $(function(){
 		
 		MM.Index.Chart.load($(this).val());
 		
-	});   
+	});
+	
 	
 });    

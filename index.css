@@ -1,0 +1,10 @@
+.ui-collapsible-heading{
+	margin: 0px 0px;
+}
+
+.ui-header{
+	background: #F7931E;
+	color: black;
+	text-shadow: 0 1px 1px #F6F6F6; 
+	font-weight: bold;
+}
