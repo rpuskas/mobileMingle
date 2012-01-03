@@ -92,7 +92,8 @@ $(function(){
 
 	});  
 	
-	window.JourneyList = Backbone.Collection.extend({
+	window.JourneyList = Backbone.Collection.extend({ 
+		localStorage: new Store("Journeys"),
 		model: Journey,
 		points: function(){
 
@@ -105,7 +106,7 @@ $(function(){
 	
 	window.JourneyView = Backbone.View.extend({
 		
-		el: $("#journey"),
+		el: $("#journey"),    
 		clear: function(){   
 			_.each($(this.el).find("input"),function(y){$(y).val("0");})         
 		},
@@ -118,9 +119,8 @@ $(function(){
 		events: {
 		    "click #add" : "addJourney"
 		}, 
-		addJourney: function(){ 
-			var newJourney = new Journey({ name: $("name"),points: $("points"),stories: $("storyCount") });
-			window.Journeys.add(newJourney);
+		addJourney: function(){  
+			window.Journeys.create({name: $("#name").val(),points: $("#points").val(),stories: $("#storyCount").val() });
 		}  
 		
 	});	 
