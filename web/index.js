@@ -1,13 +1,8 @@
 MM = {};
-MM.Index = {};
-MM.Index.Chart = { 
+MM.Chart = {   
 	
 	options : {
-		chart: {
-			renderTo: 'container',
-			type: 'column',
-			height: 250
-		}, 
+		chart: { renderTo: 'container', type: 'column', height: 250 }, 
 		tooltip: { enabled: false },
 		legend: { enabled: false },
 		title: { text: 'User Journey Backlog'}, 
@@ -33,17 +28,27 @@ MM.Index.Chart = {
 
 		chart = new Highcharts.Chart(this.options);
 	}
-	
 }
 
-$(function(){  
+$(function(){ 
 	
+	_.extend(Backbone.View.prototype,{
+		renderFromTemplate: function(file,element,obj){
+		   	var that = this;
+			var view = $.get(file, function(data){ 
+				var template = _.template(data);     
+			    element.html(template(obj));  
+			   	$.mobile.activePage.trigger('create');
+			});          
+		}
+	});
+ 
 	window.Journey = Backbone.Model.extend(
 	{   
 		defaults: {
-		    "name":  "nameless",
-		    "points":     0,
-		    "stories":    0
+		    "name": "",
+		    "points": "",
+		    "stories": ""
 	   	}
 	});  
 	
@@ -63,15 +68,14 @@ $(function(){
 	
 	window.JourneyView = Backbone.View.extend({
 		
-		el: $("#journey"), 
+		el: $("#journeyView"),  
   
 		clear: function(){   
 			_.each($(this.el).find("input"),function(y){$(y).val("");})         
 		},
-		render: function(){
-			this.$("#name").val(this.model.get("name"));
-			this.$("#points").val(this.model.get("points"));
-			this.$("#storyCount").val(this.model.get("stories"));
+		render: function(){ 
+            
+			this.renderFromTemplate("_journeyView.html",$('#journeyView'),this.model.attributes);                             
 			return this; 
 		},
 		events: {
@@ -94,7 +98,8 @@ $(function(){
 			this.model.bind('all', this.render, this);  
 		},
 		render: function(){ 
-			                                          
+			  
+			$('#result').load('ajax/test.html');                                        
 			this.$("#totalPoints").html(this.model.points());
 		  	this.$("#totalStories").html(this.model.stories());
 		  	this.$("#totalJournies").html(this.model.length);   
@@ -102,28 +107,18 @@ $(function(){
 		}
 	});
 	
-	window.JourneyViewInstance = new JourneyView({model: new Journey}); 
+	window.JourneyViewInstance = new JourneyView({model: new Journey});  
+	window.JourneyViewInstance.render();
 	window.summary = new JourneysSummaryView({model: window.Journeys}); 
 	window.summary.render();
 	
 	                 
 	$( '#viewGraph' ).live( 'pageshow',function(event){
-	
-		MM.Index.Chart.load($("#slider-stories").val());
-	
+		MM.Chart.load($("#slider-stories").val());
 	}); 
-	
-	$( '#main' ).live('main',function(event){
-	    
-		//MM.Index.Grid.refresh()
-	 
-	});
-	  
+		  
 	$( "#slider-stories" ).bind( "change", function(event, ui) {  
-		
-		MM.Index.Chart.load($(this).val());
-		
+		MM.Chart.load($(this).val());
 	});
-	
 	
 });    

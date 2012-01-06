@@ -14,4 +14,5 @@ Open web/index.html in web browser.
 *phoneGapApplication*
 1. copy web files to phoneGap WWW directory using : rake copyToPhoneGapWWW
 2. open phoneGapProject in Xcode
-3. build and run (will open simulator)
+3. build and run (will open simulator)       
+
