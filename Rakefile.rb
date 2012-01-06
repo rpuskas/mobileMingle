@@ -1,6 +1,7 @@
-task :copyToPhoneGapWWW do 
+task :copyToPhoneGapWWW => [:cleanPhoneGapWWW] do 
              
-  puts `cp -r web/* phoneGap/mobileMingle/www`
+  puts `cp -r web/* phoneGap/mobileMingle/www` 
+  Rake::Task['updateBaseURL'].invoke
                       
 end   
 
@@ -11,9 +12,10 @@ task :cleanPhoneGapWWW do
 end     
 
 task :updateBaseURL do
-
-  text = File.read('web/index.html')
+   
+  indexPath = 'phoneGap/mobileMingle/www/index.html'
+  text = File.read(indexPath)
   more = text.gsub(/(^\s*<base href=")(.*)("\/>$)/,'\1\3')
-  File.open('web/index.html', "w"){|f| f.puts more } 
+  File.open(indexPath, "w"){|f| f.puts more } 
 
 end
