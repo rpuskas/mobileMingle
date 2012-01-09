@@ -18,4 +18,4 @@ task :updateBaseURL do
   more = text.gsub(/(^\s*<base href=")(.*)("\/>$)/,'\1\3')
   File.open(indexPath, "w"){|f| f.puts more } 
 
-end
+end     

@@ -53,7 +53,7 @@ $(function(){
 	});  
 	
 	window.JourneyList = Backbone.Collection.extend({ 
-		localStorage: new Store("Journeys"),
+		//localStorage: new Store("Journeys"),
 		model: Journey,
 		points: function(){ 
 			return _.reduce(this.models, function(total, num){ return total + parseInt(num.get("points")); }, 0);
@@ -74,7 +74,6 @@ $(function(){
 			_.each($(this.el).find("input"),function(y){$(y).val("");})         
 		},
 		render: function(){ 
-            
 			this.renderFromTemplate("_journeyView.html",$('#journeyView'),this.model.attributes);                             
 			return this; 
 		},
@@ -98,8 +97,7 @@ $(function(){
 			this.model.bind('all', this.render, this);  
 		},
 		render: function(){ 
-			  
-			$('#result').load('ajax/test.html');                                        
+			                                       
 			this.$("#totalPoints").html(this.model.points());
 		  	this.$("#totalStories").html(this.model.stories());
 		  	this.$("#totalJournies").html(this.model.length);   
