@@ -53,7 +53,7 @@ $(function(){
 	});  
 	
 	window.JourneyList = Backbone.Collection.extend({ 
-		//localStorage: new Store("Journeys"),
+		localStorage: new Store("Journeys"),
 		model: Journey,
 		points: function(){ 
 			return _.reduce(this.models, function(total, num){ return total + parseInt(num.get("points")); }, 0);
