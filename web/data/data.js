@@ -1,6 +1,6 @@
-exports.journies = 
+exports.journeys = 
 [
-		{ "journey": "aware of need to shop", "storyCount": 0, "storyPoints": 0 },
-		{ "journey": "make shopping list", "storyCount": 2, "storyPoints": 5 },
-		{ "journey": "go to store", "storyCount": 25, "storyPoints": 12 },
+	{ "name": "aware of need to shop", "points": 0, "stories": 0 },
+	{ "name": "make shopping list", "points": 2, "stories": 5 },
+	{ "name": "go to store", "points": 25, "stories": 12 }
 ];
