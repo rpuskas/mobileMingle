@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'mongo'
+
 task :copyToPhoneGapWWW => [:cleanPhoneGapWWW] do 
              
   puts `cp -r web/client* phoneGap/mobileMingle/www` 
@@ -18,4 +21,19 @@ task :updateBaseURL do
   more = text.gsub(/(^\s*<base href=")(.*)("\/>$)/,'\1\3')
   File.open(indexPath, "w"){|f| f.puts more } 
 
+end
+
+task :loadTestData => [:eraseTestData] do
+  
+  puts `node web/data/loadTestData.js`
+  
 end     
+
+task :eraseTestData do
+
+  @conn = Mongo::Connection.new
+  @db   = @conn['mobileMingle']
+  @coll = @db['journeys']
+  @coll.remove
+  
+end
