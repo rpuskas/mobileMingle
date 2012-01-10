@@ -1,6 +1,6 @@
 task :copyToPhoneGapWWW => [:cleanPhoneGapWWW] do 
              
-  puts `cp -r web/* phoneGap/mobileMingle/www` 
+  puts `cp -r web/client* phoneGap/mobileMingle/www` 
   Rake::Task['updateBaseURL'].invoke
                       
 end   

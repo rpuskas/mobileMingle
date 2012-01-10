@@ -9,7 +9,7 @@ Build instructions:
 The web application is designed to work autonomously, with an option to deploy to phone gap for a native client app. 
 
 *Web application*
-Open web/index.html in web browser. 
+Open root in web browser. 
 
 *phoneGapApplication*
 1. copy web files to phoneGap WWW directory using : rake copyToPhoneGapWWW
