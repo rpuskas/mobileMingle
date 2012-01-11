@@ -24,6 +24,7 @@ app.configure('production', function(){
 app.get('/', routes.client);
 app.get('/journeys', routes.journeys)
 app.post('/journeys', routes.addJourney)
+app.delete('/journeys/:id', routes.deleteJourney)
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

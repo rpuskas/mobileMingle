@@ -42,14 +42,22 @@ $(function(){
 			});          
 		}
 	});
+	
+	_.extend(Backbone.Model.prototype,{
+		idAttribute: "_id",
+	});
  
 	window.Journey = Backbone.Model.extend(
 	{   
+		destroy: function(){ Backbone.Model.prototype.destroy.call(this,{url:this.url+'/'+this.id}) },
+		url: '/journeys',
+		initialize: function(attributes) { this.id = attributes['_id']; },
 		defaults: {
 		    "name": "",
-		    "points": "",
-		    "stories": ""
+		    "points": "0",
+		    "stories": "0"
 	   	}
+	
 	});  
 	
 	window.JourneyList = Backbone.Collection.extend({ 
@@ -82,12 +90,25 @@ $(function(){
 		    "click #add" : "addJourney",
 			"click #erase" : "eraseAll"
 		}, 
-		addJourney: function(){  
-			window.Journeys.create({name: this.$("#name").val(),points: this.$("#points").val(),stories: this.$("#storyCount").val() });
+		addJourney: function(){
+			
+			//this previously worked with the local storage as simply using the collection create. seems the async nature of it prevented it?
+			//or was it something to due with the strange pending request?
+			var journey = new window.Journey();
+			journey.set({name: this.$("#name").val() || journey.get("name")});
+			journey.set({points: this.$("#points").val() || journey.get('points')});
+			journey.set({stories: this.$("#storyCount").val() || journey.get('stories')});
+			journey.save();
+			window.Journeys.add(journey);
 			this.clear();
 		},
 		eraseAll: function(){  
-			_.each($.extend(true, [], window.Journeys.models),function(x){ console.log(x); x.destroy(); });
+			_.each($.extend(true, [], window.Journeys.models),function(x){ 
+				console.log('here');
+				x.destroy({
+					success: function(model, response) { console.log('success'); }
+				})
+			});
 		}  
 		
 	});	 
@@ -98,7 +119,6 @@ $(function(){
 			this.model.bind('all', this.render, this);  
 		},
 		render: function(){ 
-			                                       
 			this.$("#totalPoints").html(this.model.points());
 		  	this.$("#totalStories").html(this.model.stories());
 		  	this.$("#totalJournies").html(this.model.length);   
@@ -109,7 +129,6 @@ $(function(){
 	window.JourneyViewInstance = new JourneyView({model: new Journey});  
 	window.JourneyViewInstance.render();
 	window.summary = new JourneysSummaryView({model: window.Journeys}); 
-	window.summary.render();
 	
 	                 
 	$( '#viewGraph' ).live( 'pageshow',function(event){

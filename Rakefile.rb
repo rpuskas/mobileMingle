@@ -23,7 +23,7 @@ task :updateBaseURL do
 
 end
 
-task :loadTestData => [:eraseTestData] do
+task :refreshTestData => [:eraseTestData] do
   
   puts `node web/data/loadTestData.js`
   
